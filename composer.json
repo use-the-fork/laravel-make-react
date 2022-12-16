@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "use-the-fork/laravel-make-react",
+    "description": "Extends make to create react components",
     "keywords": [
-        ":vendor_name",
+        "use-the-fork",
         "laravel",
-        ":package_slug"
+        "laravel-make-react"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/use-the-fork/laravel-make-react",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Greg L",
+            "email": "sincore@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "UseTheFork\\LaravelMakeReact\\": "src",
+            "UseTheFork\\LaravelMakeReact\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "UseTheFork\\LaravelMakeReact\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "UseTheFork\\LaravelMakeReact\\LaravelMakeReactServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelMakeReact": "UseTheFork\\LaravelMakeReact\\Facades\\LaravelMakeReact"
             }
         }
     },

@@ -1,0 +1,10 @@
+import React, { lazy, Suspense } from 'react';
+
+const LazyTemplate{{ name }} = lazy(() => import('./{{ name }}'));
+
+const {{ name }} = props => (
+  <Suspense fallback={null}>
+    <LazyTemplate{{ name }} {...props} />
+  </Suspense>
+);
+export default {{ name }};

@@ -1,0 +1,5 @@
+import { createContext } from 'react';
+import { {{ name }}ContextType } from './{{ name }}Props';
+
+export const {{ name }}Context = createContext<{{ name }}ContextType | null>(null);
+export default {{ name }}Context;

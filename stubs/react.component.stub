@@ -1,0 +1,8 @@
+import React, { FC } from 'react';
+import { I{{ name }} } from './{{ name }}Props';
+
+const {{ name }}: FC<I{{ name }}> = (props) => {
+  return <div>{props.children}</div>;
+};
+
+export default {{ name }};

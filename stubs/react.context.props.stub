@@ -1,0 +1,10 @@
+export interface I{{ name }} {
+/*
+
+*/
+}
+export type {{ name }}ContextType = {
+  data{{ name }}: I{{ name }} | null
+  save{{ name }}: () => void;
+  update{{ name }}: () => void;
+};

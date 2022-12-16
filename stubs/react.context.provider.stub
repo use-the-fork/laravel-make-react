@@ -1,0 +1,12 @@
+import React, { ReactNode, useState, FC } from 'react';
+import { I{{ name }} } from './{{ name }}Props';
+import { {{ name }}Context } from './{{ name }}Context';
+
+const {{ name }}Provider: FC<ReactNode> = ({ children }) => {
+  const [data{{ name }}, set{{ name }}s] = useState<I{{ name }} | null>(null);
+  const save{{ name }} = () => {};
+  const update{{ name }} = () => {};
+  return <{{ name }}Context.Provider value={{ data{{ name }}, save{{ name }}, update{{ name }} }}>{children}</{{ name }}Context.Provider>;
+};
+
+export default {{ name }}Provider;
