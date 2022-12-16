@@ -2,13 +2,13 @@
 
 namespace UseTheFork\LaravelMakeReact\Commands;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
 {
-    protected $name = "make:react:context";
+    protected $name = 'make:react:context';
 
     /**
      * The name of the console command.
@@ -19,35 +19,35 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
      *
      * @deprecated
      */
-    protected static $defaultName = "make:react:context";
+    protected static $defaultName = 'make:react:context';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = "Create a new react context";
+    protected $description = 'Create a new react context';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = "Context";
+    protected $type = 'Context';
 
     protected function getPath($name): array
     {
         $name = Str::ucFirst(
-            Str::replaceFirst($this->rootNamespace(), "", $name)
+            Str::replaceFirst($this->rootNamespace(), '', $name)
         );
-        $baseName = str_replace("\\", "/", $name);
+        $baseName = str_replace('\\', '/', $name);
         $basePath = App::resourcePath("js/contexts/{$baseName}Context");
 
         return [
-            "index" => "{$basePath}/index.ts",
-            "props" => "{$basePath}/{$baseName}Props.ts",
-            "context" => "{$basePath}/{$baseName}Context.ts",
-            "provider" => "{$basePath}/{$baseName}ContextProvider.tsx",
+            'index' => "{$basePath}/index.ts",
+            'props' => "{$basePath}/{$baseName}Props.ts",
+            'context' => "{$basePath}/{$baseName}Context.ts",
+            'provider' => "{$basePath}/{$baseName}ContextProvider.tsx",
         ];
     }
 
@@ -59,17 +59,17 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
     protected function getStub()
     {
         $stubs = [
-            "index" => $this->resolveStubPath(
-                "/stubs/react.context.index.stub"
+            'index' => $this->resolveStubPath(
+                '/stubs/react.context.index.stub'
             ),
-            "props" => $this->resolveStubPath(
-                "/stubs/react.context.props.stub"
+            'props' => $this->resolveStubPath(
+                '/stubs/react.context.props.stub'
             ),
-            "context" => $this->resolveStubPath(
-                "/stubs/react.context.context.stub"
+            'context' => $this->resolveStubPath(
+                '/stubs/react.context.context.stub'
             ),
-            "provider" => $this->resolveStubPath(
-                "/stubs/react.context.provider.stub"
+            'provider' => $this->resolveStubPath(
+                '/stubs/react.context.provider.stub'
             ),
         ];
 
@@ -85,10 +85,10 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
     {
         return [
             [
-                "provider",
-                "p",
+                'provider',
+                'p',
                 InputOption::VALUE_OPTIONAL,
-                "create a context provider with the context",
+                'create a context provider with the context',
             ],
         ];
     }

@@ -11,7 +11,7 @@ class LaravelMakeReactServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name("laravel-make-react")
+            ->name('laravel-make-react')
             ->hasConfigFile()
             ->hasCommand(LaravelMakeReactCommand::class);
     }
