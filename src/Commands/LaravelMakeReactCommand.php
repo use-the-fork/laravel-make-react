@@ -2,14 +2,15 @@
 
 namespace UseTheFork\LaravelMakeReact\Commands;
 
-use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 
 class LaravelMakeReactCommand extends GeneratorCommand
 {
     protected function getStub()
     {
     }
+
     protected function resolveStubPath($stub)
     {
         //First check if this is a stub in our directory otherwise fallback on parent
@@ -18,10 +19,10 @@ class LaravelMakeReactCommand extends GeneratorCommand
         }
 
         return file_exists(
-            $customPath = $this->laravel->basePath(trim($stub, "/"))
+            $customPath = $this->laravel->basePath(trim($stub, '/'))
         )
             ? $customPath
-            : __DIR__ . $stub;
+            : __DIR__.$stub;
     }
 
     public function handle()
@@ -32,7 +33,7 @@ class LaravelMakeReactCommand extends GeneratorCommand
         // TODO: Change this to make sence
         if ($this->isReservedName($this->getNameInput())) {
             $this->components->error(
-                'The name "' . $this->getNameInput() . '" is reserved by React.'
+                'The name "'.$this->getNameInput().'" is reserved by React.'
             );
 
             return false;
@@ -48,14 +49,14 @@ class LaravelMakeReactCommand extends GeneratorCommand
         // code is untouched. Otherwise, we will continue generating this class' files.
 
         if (
-            (!$this->hasOption("force") || !$this->option("force")) &&
+            (! $this->hasOption('force') || ! $this->option('force')) &&
             collect($paths)
                 ->reject(function ($value) {
-                    return !$this->files->exists($value);
+                    return ! $this->files->exists($value);
                 })
                 ->isNotEmpty()
         ) {
-            $this->components->error($this->type . " already exists.");
+            $this->components->error($this->type.' already exists.');
 
             return false;
         }
@@ -82,7 +83,7 @@ class LaravelMakeReactCommand extends GeneratorCommand
                 $info = $this->type;
 
                 $this->components->info(
-                    sprintf("%s [%s] created successfully.", $info, $thePath)
+                    sprintf('%s [%s] created successfully.', $info, $thePath)
                 );
             }
         }
@@ -101,7 +102,7 @@ class LaravelMakeReactCommand extends GeneratorCommand
     protected function getFormatedName($name)
     {
         return Str::ucFirst(
-            Str::replaceFirst($this->rootNamespace(), "", $name)
+            Str::replaceFirst($this->rootNamespace(), '', $name)
         );
     }
 
@@ -112,19 +113,20 @@ class LaravelMakeReactCommand extends GeneratorCommand
 
     protected function replaceNamespace(&$stub, $name)
     {
-        $searches = [["DummyName"], ["{{ name }}"]];
+        $searches = [['DummyName'], ['{{ name }}']];
 
         foreach ($searches as $search) {
             $stub = str_replace($search, [$name], $stub);
         }
+
         return $stub;
     }
 
     public static function resolvePath($stub)
     {
         return realpath(
-            str(join(DIRECTORY_SEPARATOR, [__DIR__, "..", "..", $stub]))
-                ->replace("//", "/")
+            str(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', $stub]))
+                ->replace('//', '/')
                 ->toString()
         );
     }

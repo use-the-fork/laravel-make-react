@@ -1,0 +1,5 @@
+export const use{{ name }} = () => {
+    return { /* */ } as const;
+};
+
+export default use{{ name }};

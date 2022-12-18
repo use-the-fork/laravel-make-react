@@ -6,9 +6,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
-class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
+class LaravelMakeReactComponentCommand extends LaravelMakeReactCommand
 {
-    protected $name = 'make:react:context';
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'make:react:component';
 
     /**
      * The name of the console command.
@@ -19,21 +24,21 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
      *
      * @deprecated
      */
-    protected static $defaultName = 'make:react:context';
+    protected static $defaultName = 'make:react:component';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new react context';
+    protected $description = 'Create a new react component';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Context';
+    protected $type = 'Component';
 
     protected function getPath($name): array
     {
@@ -41,14 +46,19 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
             Str::replaceFirst($this->rootNamespace(), '', $name)
         );
         $baseName = str_replace('\\', '/', $name);
-        $basePath = App::resourcePath("js/contexts/{$baseName}Context");
+        $basePath = App::resourcePath("js/components/{$baseName}");
 
-        return [
+        $thePaths = [
             'index' => "{$basePath}/index.ts",
             'props' => "{$basePath}/{$baseName}Props.ts",
-            'context' => "{$basePath}/{$baseName}Context.ts",
-            'provider' => "{$basePath}/{$baseName}ContextProvider.tsx",
+            'component' => "{$basePath}/{$baseName}.tsx",
         ];
+
+        if ($this->option('lazy')) {
+            $thePaths['lazy'] = "{$basePath}/{$baseName}Lazy.tsx";
+        }
+
+        return $thePaths;
     }
 
     /**
@@ -60,18 +70,24 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
     {
         $stubs = [
             'index' => $this->resolveStubPath(
-                '/stubs/react.context.index.stub'
+                '/stubs/react.component.index.stub'
             ),
             'props' => $this->resolveStubPath(
-                '/stubs/react.context.props.stub'
+                '/stubs/react.component.props.stub'
             ),
-            'context' => $this->resolveStubPath(
-                '/stubs/react.context.context.stub'
-            ),
-            'provider' => $this->resolveStubPath(
-                '/stubs/react.context.provider.stub'
+            'component' => $this->resolveStubPath(
+                '/stubs/react.component.stub'
             ),
         ];
+
+        if ($this->option('lazy')) {
+            $stubs['index'] = $this->resolveStubPath(
+                '/stubs/react.component.index.lazy.stub'
+            );
+            $stubs['lazy'] = $this->resolveStubPath(
+                '/stubs/react.component.lazy.stub'
+            );
+        }
 
         return $stubs;
     }
@@ -85,10 +101,10 @@ class LaravelMakeReactContextCommand extends LaravelMakeReactCommand
     {
         return [
             [
-                'provider',
-                'p',
-                InputOption::VALUE_OPTIONAL,
-                'create a context provider with the context',
+                'lazy',
+                'l',
+                InputOption::VALUE_NONE,
+                'Make the component lazy load',
             ],
         ];
     }
