@@ -5,4 +5,5 @@ const {{ name }}: FC<I{{ name }}> = (props) => {
   return <div>{props.children}</div>;
 };
 
+{{ name }}.defaultProps = { /* */ };
 export default {{ name }};
